@@ -10,15 +10,17 @@ public class HiloCliente extends Thread{
     protected DataInputStream dataInputStream;
     
     private final int id;
+    private final String host;
 
-    public HiloCliente(int id) {
+    public HiloCliente(int id, String host) {
         this.id = id;
+        this.host = host;
     }
     
     @Override
     public void run() {
         try {
-            socket = new Socket("localhost", 8080);
+            socket = new Socket(host, 8080);
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataInputStream = new DataInputStream(socket.getInputStream());
         } catch (IOException e) {
